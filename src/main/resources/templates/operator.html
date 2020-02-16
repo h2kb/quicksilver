@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <link href="css/styles.css" rel="stylesheet"/>
+    <title>Quicksilver</title>
+</head>
+<body>
+<h1>List of outgoing call tasks</h1>
+<div>
+    <table border="1">
+        <tr>
+            <th>Order number</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Phone number</th>
+            <th>Create at</th>
+        </tr>
+        <tr th:each="outgoingCallTask : ${outgoingCallTasks}">
+            <td th:utext="${outgoingCallTask.orderNumber}">...</td>
+            <td th:utext="${outgoingCallTask.firstName}">...</td>
+            <td th:utext="${outgoingCallTask.lastName}">...</td>
+            <td th:utext="${outgoingCallTask.phoneNumber}">...</td>
+            <td th:utext="${outgoingCallTask.createAt}">...</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

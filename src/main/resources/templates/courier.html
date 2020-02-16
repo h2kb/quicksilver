@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link href="css/styles.css" rel="stylesheet"/>
+    <title>Quicksilver</title>
+</head>
+<body>
+<h1>Create an outgoing call task</h1>
+<form th:action="@{/quicksilver/courier}" th:object="${deliveryOrderForm}" method="POST">
+    <p>
+        Order number: <input type="text" th:field="*{orderNumber}" autofocus="autofocus"/>
+    </p>
+    <input type="submit" value="Reschedule"/>
+</form>
+<br/>
+<div th:if="${errorMessage}" th:utext="${errorMessage}" style="color:red;">
+    ...
+</div>
+</body>
