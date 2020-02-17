@@ -5,10 +5,15 @@ import io.github.h2kb.model.DeliveryOrder;
 import io.github.h2kb.model.OutgoingCallTask;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+
 @Service
 public class OutgoingCallTaskDtoConverter {
 
-    public OutgoingCallTaskDto converter(OutgoingCallTask outgoingCallTask, DeliveryOrder deliveryOrder, Customer customer) {
+    private String pattern = "dd-MM-yyyy HH:mm:ss";
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+    public OutgoingCallTaskDto convert(OutgoingCallTask outgoingCallTask, DeliveryOrder deliveryOrder, Customer customer) {
         OutgoingCallTaskDto outgoingCallTaskDto = new OutgoingCallTaskDto();
         outgoingCallTaskDto.setFirstName(customer.getFirstName());
         outgoingCallTaskDto.setLastName(customer.getLastName());

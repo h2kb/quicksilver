@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class OutgoingCallTaskServiceImpl implements OutgoingCallTaskService {
@@ -52,11 +51,19 @@ public class OutgoingCallTaskServiceImpl implements OutgoingCallTaskService {
             DeliveryOrder deliveryOrder = deliveryOrderRepository.findById(outgoingCallTask.getDeliveryOrderId());
             Customer customer = customerRepository.findById(deliveryOrder.getCustomerId());
 
-//            return outgoingCallTasks.stream().map(task -> dtoConverter.converter(task, deliveryOrder, customer)).collect(Collectors.toList());
-            outgoingCallTaskDtos.add(dtoConverter.converter(outgoingCallTask, deliveryOrder, customer));
+            outgoingCallTaskDtos.add(dtoConverter.convert(outgoingCallTask, deliveryOrder, customer));
         }
 
         return outgoingCallTaskDtos;
+    }
+
+    @Override
+    public OutgoingCallTaskDto getOutgoingCallTask(String orderNumber) {
+        DeliveryOrder deliveryOrder = deliveryOrderRepository.findByOrderNumber(orderNumber);
+        Customer customer = customerRepository.findById(deliveryOrder.getCustomerId());
+        OutgoingCallTask outgoingCallTask = outgoingCallTaskRepository.findByDeliveryOrderNumberId(deliveryOrder.getId());
+
+        return dtoConverter.convert(outgoingCallTask, deliveryOrder, customer);
     }
 
 }

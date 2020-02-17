@@ -1,5 +1,6 @@
 package io.github.h2kb.repository.outgoingCallTask;
 
+import io.github.h2kb.model.DeliveryOrder;
 import io.github.h2kb.model.OutgoingCallTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,10 +26,15 @@ public class JdbcOutgoingCallTaskRepository implements OutgoingCallTaskRepositor
         return jdbc.update("INSERT INTO outgoing_call_task (delivery_order_id, create_at, active) VALUES (?, ?, ?)", orderNumberId, new Date(), "YES");
     }
 
+    @Override
+    public OutgoingCallTask findByDeliveryOrderNumberId(Long orderNumberId) {
+        return jdbc.queryForObject("SELECT id, delivery_order_id, create_at FROM outgoing_call_task WHERE delivery_order_id = ? AND active = 'YES'", this::mapRowToOutgoingCallTask, orderNumberId);
+    }
+
 
     private OutgoingCallTask mapRowToOutgoingCallTask(ResultSet resultSet, int rowNum) throws SQLException {
         return new OutgoingCallTask(resultSet.getLong("id"),
-                resultSet.getDate("create_at"),
+                resultSet.getTimestamp("create_at"),
                 resultSet.getLong("delivery_order_id"));
     }
 }
