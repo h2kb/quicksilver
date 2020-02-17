@@ -1,7 +1,6 @@
 package io.github.h2kb.service;
 
 import io.github.h2kb.dto.OutgoingCallTaskDto;
-import io.github.h2kb.model.OutgoingCallTask;
 
 public interface OutgoingCallTaskService extends CommonService{
 

@@ -2,7 +2,6 @@ package io.github.h2kb.controller;
 
 import io.github.h2kb.dto.OutgoingCallTaskDto;
 import io.github.h2kb.form.DeliveryOrderForm;
-import io.github.h2kb.model.OutgoingCallTask;
 import io.github.h2kb.service.impl.OutgoingCallTaskServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
